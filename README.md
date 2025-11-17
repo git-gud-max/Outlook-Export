@@ -43,5 +43,5 @@ Execution method:
     
     python outlook-export-MSG.py -f "FOLDER_NAME" [--single-folder]
 
--f FOLDER_NAME "Specify which folder from outlook you want to extract from"
---single-folder (Optional function) "Specify if you want all the output within 1 folder. Default setting will separate each email into 1 subfolder based on their timestamp"
+   -f FOLDER_NAME "Specify which folder from outlook you want to extract from"
+   --single-folder (Optional function) "Specify if you want all the output within 1 folder. Default setting will separate each email into 1 subfolder based on their timestamp"
