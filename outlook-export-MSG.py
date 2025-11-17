@@ -57,7 +57,9 @@ def export_emails(folder, output_dir):
                 
                 # Save the email as a .msg file
                 message.SaveAs(str(email_folder / file_name), win32com.client.constants.olMSG)
-
+                
+                if message.Attachments.Count > 0:
+                    save_attachments(message.Attachments, email_folder)
             processed_count += 1
         except Exception as e:
             errors_and_skips.append(f"Error with item at {email_time}: {str(e)}")
@@ -81,6 +83,7 @@ def export_emails_to_single_folder(folder, output_dir):
     email_folder = create_directory(output_dir, folder.Name)
     # Create a sub directory for all-in-one emails
     test_base_dir = create_directory(email_folder, "All-In-One")
+    att_base_dir = create_directory(test_base_dir, "Attachments")
 
     for message in messages:
         email_time = "Unknown"
@@ -100,7 +103,8 @@ def export_emails_to_single_folder(folder, output_dir):
 
             # Save the email as a .msg file within the directory for the entire folder
             message.SaveAs(str(test_base_dir / file_name), win32com.client.constants.olMSG)
-
+            if message.Attachments.Count > 0:
+                    save_attachments(message.Attachments, att_base_dir)
             processed_count += 1
         except Exception as e:
             errors_and_skips.append(f"Error with item at {email_time}: {str(e)}")
